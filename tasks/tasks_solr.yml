@@ -3,15 +3,15 @@
     file: path="{{solr_download_dir}}" state=directory
 
   - name: SOLR | Download distribution
-    get_url: url="http://www.apache.org/dist/lucene/solr/{{solr_version}}/solr-{{solr_version}}.tgz" dest="{{solr_download_dir}}/solr.tgz"
+    get_url: url="http://www.apache.org/dist/lucene/solr/{{solr_version}}/solr-{{solr_version}}.tgz" dest="{{solr_download_dir}}/solr-{{solr_version}}.tgz"
 
   - name: SOLR | Unpack wizard shell script
-    shell: "tar xzf solr.tgz solr-{{solr_version}}/bin/install_solr_service.sh --strip-components=2"
+    shell: "tar xzf solr-{{solr_version}}.tgz solr-{{solr_version}}/bin/install_solr_service.sh --strip-components=2"
     args:
       chdir: "{{solr_download_dir}}"
 
   - name: SOLR | Execute magic wizard
-    shell: "install_solr_service.sh solr.tgz"
+    shell: "./install_solr_service.sh solr-{{solr_version}}.tgz"
     args:
       chdir: "{{solr_download_dir}}"
     become: yes  
