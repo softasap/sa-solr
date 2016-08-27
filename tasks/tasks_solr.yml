@@ -20,8 +20,9 @@
     when: solr_present | failed
 
   - name: SOLR | Execute magic wizard
-    shell: "./install_solr_service.sh solr-{{solr_version}}.tgz"
+    shell: "./install_solr_service.sh -d {{solr_files_path}} -i {{solr_install_path}} -p {{solr_port}} -s {{solr_service}} -u {{solr_user}} solr-{{solr_version}}.tgz"
     args:
       chdir: "{{solr_download_dir}}"
     become: yes
+    when: solr_present | failed
     ignore_errors: docker_test is defined
