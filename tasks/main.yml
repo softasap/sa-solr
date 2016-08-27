@@ -1,3 +1,8 @@
 ---
 # tasks file for sa-solr
+
+  - include: tasks_java.yml
+    when: option_install_java
+
+
   - include: tasks_solr.yml
