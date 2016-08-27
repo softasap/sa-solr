@@ -1,17 +1,27 @@
 ---
+
+  - name: SOLR | Check if is present
+    command: "test -x /opt/solr-{{solr_version}}/bin"
+    ignore_errors: yes
+    register: solr_present
+
   - name: SOLR | Ensure SOLR download dir exists
     file: path="{{solr_download_dir}}" state=directory
+    when: solr_present | failed
 
   - name: SOLR | Download distribution
     get_url: url="http://www.apache.org/dist/lucene/solr/{{solr_version}}/solr-{{solr_version}}.tgz" dest="{{solr_download_dir}}/solr-{{solr_version}}.tgz"
+    when: solr_present | failed
 
   - name: SOLR | Unpack wizard shell script
     shell: "tar xzf solr-{{solr_version}}.tgz solr-{{solr_version}}/bin/install_solr_service.sh --strip-components=2"
     args:
       chdir: "{{solr_download_dir}}"
+    when: solr_present | failed
 
   - name: SOLR | Execute magic wizard
     shell: "./install_solr_service.sh solr-{{solr_version}}.tgz"
     args:
       chdir: "{{solr_download_dir}}"
-    become: yes  
+    become: yes
+    ignore_errors: docker_test is defined
