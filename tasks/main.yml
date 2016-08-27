@@ -1,0 +1,3 @@
+---
+# tasks file for sa-solr
+  - include: tasks_solr.yml

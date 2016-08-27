@@ -1,0 +1,12 @@
+---
+# defaults file for sa-tomcat
+
+  root_dir: "{{ role_path }}"
+  role_dir: "{{ role_path }}"
+
+  java_version: 8
+  option_install_java: false
+
+  solr_version: 6.2.0
+
+  solr_download_dir: /tmp/solr

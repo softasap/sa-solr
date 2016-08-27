@@ -1,0 +1,4 @@
+[submodule "roles/sa-solr"]
+        path = roles/sa-solr
+        url = https://github.com/softasap/sa-solr.git
+
