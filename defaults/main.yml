@@ -7,7 +7,7 @@
   java_version: 8
   option_install_java: false
 
-  solr_version: 8.4.1
+  solr_version: 8.5.1
 
   solr_files_path: /var/solr
   solr_install_path: /opt
